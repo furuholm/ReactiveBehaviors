@@ -1,4 +1,4 @@
-package rxbehavior
+package rxbehaviors
 
 import rx.lang.scala.Observable
 import rx.lang.scala.Observer
