@@ -1,10 +1,18 @@
-This library implements a finite state machine built on top of RxScala. The goal is to provide a way to implement Rx applications that needs to switch behavior over time. A behavior in this library is typically an observable + an action (or observer) that should be "activated" when the behavior is activated.
+This library implements a finite state machine built on top of RxScala. The goal is to provide a way to implement Rx applications that needs to switch behavior over time. 
 
+A behavior is a trait that represents something that can be activated or deactivated. Typically it is an observable + an action (or observer) that becomes  "activated" (subscribed) when the behavior is activated.
+
+Transitions are triggered by an Observable\[Unit\]. It might be more suitable to allow an Observable of an arbitrary type, so this might be changed.
+
+## Status
 Currently the library should be considered a draft or a basis for discussion more than anything else. It lacks many things both to be a complete FSM and to be a good Rx citizen. Hopefully it implements enough to get the idea accross though.
 
+## Contact
 I would love to get some feedback! You can find me on twitter [@tobiasfuruholm](http://twitter.com/tobiasfuruholm)
 
-## Example usage (simple FSM with two states)
+## Example 
+
+### Simple FSM with two states
 
     import rxbehavior
     import scala.concurrent.duration._
@@ -49,4 +57,20 @@ I would love to get some feedback! You can find me on twitter [@tobiasfuruholm](
       }
     }
 
+#### Output
+Below is the example of the output generated from a test run.
 
+    initial state: 0
+    initial state: 1
+    initial state: 2
+    initial state: 3
+    s
+    next state: = 0
+    next state: = 1
+    next state: = 2
+    next state: = 3
+    s
+    initial state: 0
+    initial state: 1
+    initial state: 2
+    q
