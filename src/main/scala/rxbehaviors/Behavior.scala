@@ -15,10 +15,12 @@ object Behavior {
   }
 
   class Impl[T](observable: Observable[T], action: T => Unit) extends Behavior {
+    val connectable = observable.publish
+    val subscription = connectable.subscribe(action)
     var activeSubscription: Subscription = _
 
     def activate: Unit = {
-      activeSubscription = observable.subscribe(Observer(action))
+      activeSubscription = connectable.connect
     }
 
     def deactivate: Unit = {
